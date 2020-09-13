@@ -50,7 +50,8 @@ string LinuxParser::Kernel() {
   return kernel;
 }
 
-/* Retrieve all the pids of active processes in the system. Read from /proc entry. */
+/* Retrieve all the pids of active processes in the system. Read from /proc
+ * entry. */
 vector<int> LinuxParser::Pids() {
   vector<int> pids;
   DIR* directory = opendir(kProcDirectory.c_str());
@@ -116,7 +117,8 @@ long LinuxParser::Jiffies() {
   return (uptime * sysconf(_SC_CLK_TCK));
 }
 
-/* Amount of time for the process scheduled since the boot. Read from /proc/pid/stat. The actual jiffie
+/* Amount of time for the process scheduled since the boot. Read from
+ * /proc/pid/stat. The actual jiffie
  * is the sum of 14-17 fields.
  */
 long LinuxParser::ActiveJiffies(int pid) {
@@ -138,7 +140,8 @@ long LinuxParser::ActiveJiffies(int pid) {
   return active_jiffies;
 }
 
-/* CPU time. Read from /proc/stat. The actual jiffie is the sum of all the time entries. */
+/* CPU time. Read from /proc/stat. The actual jiffie is the sum of all the time
+ * entries. */
 long LinuxParser::ActiveJiffies() {
   string line{};
   string key{};
@@ -160,7 +163,8 @@ long LinuxParser::ActiveJiffies() {
   return active_jiffies;
 }
 
-/* Time spent in idle task. Read from /proc/stat and the actual jiffie is sum of time spent in idle task
+/* Time spent in idle task. Read from /proc/stat and the actual jiffie is sum of
+ * time spent in idle task
  * and time waiting for I/O to complete.
  */
 long LinuxParser::IdleJiffies() {
@@ -327,7 +331,8 @@ string LinuxParser::User(int pid) {
 }
 
 /* Read from /proc/pid/stat. Start time of the program is 22th entry.
- * Calculate total Uptime of process is obtained by find the difference with total uptime of system.
+ * Calculate total Uptime of process is obtained by find the difference with
+ * total uptime of system.
  */
 long LinuxParser::UpTime(int pid) {
   long uptime = 0;
@@ -344,7 +349,6 @@ long LinuxParser::UpTime(int pid) {
       if (22 == iter) {
         uptime = atol(value.c_str());
         break;
-
       }
       ++iter;
     }

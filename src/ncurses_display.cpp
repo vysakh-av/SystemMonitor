@@ -88,7 +88,7 @@ void NCursesDisplay::Display(System& system, int n) {
   cbreak();       // terminate ncurses on ctrl + c
   start_color();  // enable color
 
-  n = system.Processes().size(); //Total processes count.
+  n = system.Processes().size();  // Total processes count.
   int x_max{getmaxx(stdscr)};
   WINDOW* system_window = newwin(9, x_max - 1, 0, 0);
   WINDOW* process_window =
